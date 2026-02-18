@@ -1435,7 +1435,8 @@ extern "C" {
         link_name = "mktime$UNIX2003"
     )]
     #[cfg_attr(target_os = "netbsd", link_name = "__mktime50")]
-    #[cfg_attr(any(target_env = "musl", target_env = "ohos"), allow(deprecated))]
+    #[cfg_attr(any(target_env = "fortanixvme", target_env = "musl", target_env = "ohos"),
+    allow(deprecated))]
     // FIXME: for `time_t`
     #[cfg_attr(gnu_time_bits64, link_name = "__mktime64")]
     pub fn mktime(tm: *mut tm) -> time_t;
@@ -1855,7 +1856,6 @@ cfg_if! {
         pub use self::newlib::*;
     } else if #[cfg(any(
         target_os = "linux",
-        target_env = "fortanixvme",
         target_os = "l4re",
         target_os = "android",
         target_os = "emscripten"
